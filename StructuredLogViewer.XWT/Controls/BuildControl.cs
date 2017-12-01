@@ -37,6 +37,7 @@ namespace StructuredLogViewer.XWT.Controls
 		DataField<Image> iconCol = new DataField<Image>();
 		DataField<BaseNode> baseNode = new DataField<BaseNode>();
 
+		Notebook tabControl;
 		RichTextView textView;
 		SearchAndResultsControl searchLogControl;
 
@@ -140,7 +141,7 @@ namespace StructuredLogViewer.XWT.Controls
 			//ActiveTreeView.SelectionChanged += ActiveTreeViewSelectionChanged;
 
 			//searchLogControl.ResultsList.ItemContainerStyle = treeViewItemStyle;
-			//searchLogControl.ResultsList.SelectedItemChanged += ResultsList_SelectionChanged;
+			searchLogControl.ResultsList.SelectionChanged += ResultsList_SelectionChanged1;
 			//searchLogControl.ResultsList.GotFocus += (s, a) => ActiveTreeView = searchLogControl.ResultsList;
 			//searchLogControl.ResultsList.ContextMenu = sharedTreeContextMenu;
 
@@ -176,11 +177,16 @@ namespace StructuredLogViewer.XWT.Controls
 			//preprocessedFileManager = new PreprocessedFileManager(this, sourceFileResolver);
 
 			var boxes = new HBox();
-			var tabControlBox = new VBox {
-				WidthRequest = 200
-			};
 
-			tabControlBox.PackStart(searchLogControl, true);
+			tabControl = new Notebook {
+				WidthRequest = 200,
+			};
+			tabControl.Add(searchLogControl, "Search Log");
+			tabControl.Add(new VBox(), "Files");
+			tabControl.Add(new VBox(), "Find in Files");
+			tabControl.TabOrientation = NotebookTabOrientation.Bottom;
+			//PackStart(tabControl, true);
+
 			var treeAndSourceBox = new HPaned();
 
 			var ActiveTreeViewBox = new VBox {
@@ -198,7 +204,7 @@ namespace StructuredLogViewer.XWT.Controls
 			};
 			PackEnd(textView);
 
-			boxes.PackStart(tabControlBox);
+			boxes.PackStart(tabControl);
 			boxes.PackEnd(treeAndSourceBox, true);
 
 			PopulateTimeline();
@@ -308,6 +314,7 @@ namespace StructuredLogViewer.XWT.Controls
 				}
 			}
 		}
+
 		public void SelectTree()
 		{
 			//centralTabControl.SelectedIndex = 0;
@@ -315,7 +322,7 @@ namespace StructuredLogViewer.XWT.Controls
 
 		private void PopulateTimeline()
 		{
-			var timeline = new Timeline(Build);
+			//var timeline = new Timeline(Build);
 			//this.timeline.BuildControl = this;
 			//this.timeline.SetTimeline(timeline);
 		}
@@ -584,16 +591,18 @@ Examples:
 		//	}
 		//}
 
-		//private void ResultsList_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-		//{
-		//	var proxy = searchLogControl.ResultsList.SelectedItem as ProxyNode;
-		//	if (proxy != null) {
-		//		var item = proxy.Original as ParentedNode;
-		//		if (item != null) {
-		//			SelectItem(item);
-		//		}
-		//	}
-		//}
+		void ResultsList_SelectionChanged1(object sender, EventArgs e)
+		{
+			int selectedRow = searchLogControl.ResultsList.SelectedRow;
+			var proxy = searchLogControl.ResultStore.GetValue(selectedRow, searchLogControl.node);
+			//var proxy = selectedRow as ProxyNode;
+			if (proxy != null) {
+				var item = proxy.Original as ParentedNode;
+				if (item != null) {
+					SelectItem(item);
+				}
+			}
+		}
 
 		//public void UpdateBreadcrumb(object item)
 		//{
@@ -638,16 +647,18 @@ Examples:
 		//	}
 		//}
 
-		//public void SelectItem(ParentedNode item)
-		//{
-		//	var parentChain = item.GetParentChain();
-		//	if (!parentChain.Any()) {
-		//		return;
-		//	}
+		public void SelectItem(ParentedNode item)
+		{
+			var parentChain = item.GetParentChain();
+			if (!parentChain.Any()) {
+				return;
+			}
 
-		//	SelectTree();
-		//	treeView.SelectContainerFromItem<object>(parentChain);
-		//}
+			SelectTree();
+			IEnumerable<TreeNavigator> pos = ActiveTreeStore.FindNavigators(item, baseNode);
+			var position = pos.First().CurrentPosition;
+			ActiveTreeView.SelectRow(position);
+		}
 
 		//private void TreeView_KeyDown(object sender, KeyEventArgs args)
 		//{

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 using Xwt;
 using Microsoft.Build.Logging.StructuredLogger;
-using Xwt.Drawing;
 
 namespace StructuredLogViewer.XWT.Controls
 {
@@ -11,11 +10,11 @@ namespace StructuredLogViewer.XWT.Controls
     {
 		SearchTextEntry searchTextEntry;
 
-		ListView list;
-		ListStore store;
+		public ListView ResultsList;
+		public ListStore ResultStore;
 
 		DataField<string> name = new DataField<string>();
-		DataField<ProxyNode> node = new DataField<ProxyNode>();
+		public DataField<ProxyNode> node = new DataField<ProxyNode>();
 
 
 		public Func<object, IEnumerable<object>> ResultsTreeBuilder { get; set; }
@@ -43,14 +42,14 @@ namespace StructuredLogViewer.XWT.Controls
 			searchTextEntry.Changed += SearchTextChanged;
 			PackStart(searchTextEntry);
 
-			store = new ListStore(name, node);
-			list = new ListView(store) {
+			ResultStore = new ListStore(name, node);
+			ResultsList = new ListView(ResultStore) {
 				HeadersVisible = false,
 				ExpandVertical = true,
 			};
-			list.DataSource = store;
-			list.Columns.Add("Name", name);
-			PackStart(list, true);
+			ResultsList.DataSource = ResultStore;
+			ResultsList.Columns.Add("Name", name);
+			PackStart(ResultsList, true);
 		}
 
 		public Func<string, object> ExecuteSearch
@@ -90,14 +89,14 @@ namespace StructuredLogViewer.XWT.Controls
 
 		void UpdateListStore(IEnumerable<object> results)
 		{
-			store.Clear();
+			ResultStore.Clear();
 
 			if (results == null) return;
 
 			foreach (ProxyNode result in results) {
-				var r = store.AddRow();
-				store.SetValue (r, name, result.ToString());
-				store.SetValue (r, node, result);
+				var r = ResultStore.AddRow();
+				ResultStore.SetValue (r, name, result.ToString());
+				ResultStore.SetValue (r, node, result);
 			}
 		}
 
