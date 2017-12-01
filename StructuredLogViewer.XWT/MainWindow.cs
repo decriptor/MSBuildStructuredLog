@@ -78,15 +78,20 @@ namespace StructuredLogViewer.XWT
 			file.SubMenu.Items.Add(exitMenuItem);
 			menu.Items.Add(file);
 
-			var help = new MenuItem("_Help");
-			help.Clicked += HelpClicked;
+			var help = new MenuItem("_Help") {
+				SubMenu = new Menu()
+			};
+			var projectHome = new MenuItem("Project home");
+			projectHome.Clicked += ProjectHomeClicked;
+			help.SubMenu.Items.Add(projectHome);
+			menu.Items.Add(help);
 
 			return menu;
 		}
 
-		void HelpClicked(Object sender, EventArgs e)
+		void ProjectHomeClicked(Object sender, EventArgs e)
 		{
-			// OpenUrl ("https://github.com/KirillOsenkov/MSBuildStructuredLog");
+			Process.Start ("https://github.com/KirillOsenkov/MSBuildStructuredLog");
 		}
 
 		async void OpenLogFile(string filePath = "msbuild.binlog")
@@ -131,8 +136,6 @@ namespace StructuredLogViewer.XWT
 			//await Dispatcher.InvokeAsync(() => { }, DispatcherPriority.Loaded); // let the progress message be rendered before we block the UI again
 
 			//DisplayBuild(build);
-			//buildTreeStore.Clear();
-
 			Content = new BuildControl(currentBuild, filePath);
 		}
 
