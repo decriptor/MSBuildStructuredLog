@@ -18,6 +18,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		version.json = version.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StructuredLogViewer.XWT", "StructuredLogViewer.XWT\StructuredLogViewer.XWT.csproj", "{E2D1133D-0602-4813-968B-18BB70CB602E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StructuredLogView.Core", "StructuredLogView.Core\StructuredLogView.Core.csproj", "{9C8A188C-FBCE-4655-A8E2-99C2093E7FC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +54,22 @@ Global
 		{8A327073-0811-49D6-B1AA-1FB0157E750A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8A327073-0811-49D6-B1AA-1FB0157E750A}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{8A327073-0811-49D6-B1AA-1FB0157E750A}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E2D1133D-0602-4813-968B-18BB70CB602E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2D1133D-0602-4813-968B-18BB70CB602E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2D1133D-0602-4813-968B-18BB70CB602E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E2D1133D-0602-4813-968B-18BB70CB602E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E2D1133D-0602-4813-968B-18BB70CB602E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2D1133D-0602-4813-968B-18BB70CB602E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2D1133D-0602-4813-968B-18BB70CB602E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E2D1133D-0602-4813-968B-18BB70CB602E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9C8A188C-FBCE-4655-A8E2-99C2093E7FC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C8A188C-FBCE-4655-A8E2-99C2093E7FC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C8A188C-FBCE-4655-A8E2-99C2093E7FC8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9C8A188C-FBCE-4655-A8E2-99C2093E7FC8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9C8A188C-FBCE-4655-A8E2-99C2093E7FC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C8A188C-FBCE-4655-A8E2-99C2093E7FC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C8A188C-FBCE-4655-A8E2-99C2093E7FC8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9C8A188C-FBCE-4655-A8E2-99C2093E7FC8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -158,7 +158,8 @@ namespace StructuredLogViewer
         {
             if (!File.Exists(recentMSBuildLocationsFilePath))
             {
-                SaveText(recentMSBuildLocationsFilePath, MSBuildLocator.GetMSBuildLocations());
+                // FIXME,
+                //SaveText(recentMSBuildLocationsFilePath, MSBuildLocator.GetMSBuildLocations());
             }
         }
 

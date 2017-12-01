@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Diagnostics;
 
 namespace Microsoft.Build.Logging.StructuredLogger
 {
@@ -32,8 +33,9 @@ namespace Microsoft.Build.Logging.StructuredLogger
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(
-                    "Error while analyzing build. Sorry about that. Please Ctrl+C to copy this text and file an issue on https://github.com/KirillOsenkov/MSBuildStructuredLog/issues/new \r\n" + ex.ToString());
+                // FIXME, MessageBox
+                //System.Windows.MessageBox.Show(
+                Debug.WriteLine ("Error while analyzing build. Sorry about that. Please Ctrl+C to copy this text and file an issue on https://github.com/KirillOsenkov/MSBuildStructuredLog/issues/new \r\n" + ex.ToString());
             }
         }
 
